@@ -15,6 +15,7 @@ async def on_ready():
     print('*******************')
 
 @client.command()   #for testing
+@commands.has_permissions(administrator=True)
 async def ping(ctx):
     await ctx.send(f'Surprise motherfucker in {client.latency * 1000}ms')
 
