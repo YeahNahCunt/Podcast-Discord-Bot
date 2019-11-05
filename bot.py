@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
-import os #for bot token linking with host
+from discord.utils import get
+import youtube_dl
+import os
 
 client = commands.Bot(command_prefix = '|') #holder prefix change later
 
@@ -14,9 +16,46 @@ async def on_ready():
     print(client.user.id)
     print('*******************')
 
-@client.command()   #for testing
-@commands.has_permissions(administrator=True)
+##testing if online##
+@client.command()
 async def ping(ctx):
     await ctx.send(f'Surprise motherfucker in {client.latency * 1000}ms')
+
+
+##VC Join##
+@client.command(pass_context=True, aliases=['join', 'j', 'J'])
+async def join(ctx):
+    global voice
+    channel = ctx.message.author.voice.channel
+    voice = get(client.voice_clients, guild=ctx.guild)
+
+    if voice and voice.is_connected():
+        await voice.move_to(chennel)
+    else:
+        voice = await channel.connect()
+
+    await voice.disconnect()
+
+    if voice and voice.is_connected():
+        await voice.move_to(chennel)
+    else:
+        voice = await channel.connect()
+        print(f'The bot has connected to {channel}\n') #console check
+
+    await ctx.send(f'Joined {channel}')
+
+##VC Leave##
+@client.command(pass_context=True, aliases=['leave', 'l', 'L'])
+async def leave(ctx):
+    channel = ctx.message.author.voice.channel
+    voice = get(client.voice_clients, guild=ctx.guild)
+
+    if voice and voice.is_connected():
+        await voice.disconnect()
+        print(f'The bot has left {channel}\n') #console check
+        await ctx.send(f'Left {channel}')
+    else:
+        print ('Bot was told to leave channel but not in one')
+        await ctx.send('Í dont think im in a voice channel')
 
 client.run(os.environ['BOT_TOKEN'])
