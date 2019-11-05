@@ -24,7 +24,7 @@ async def ping(ctx):
 
 ##VC Join##
 @client.command(pass_context=True, aliases=['join', 'j', 'J'])
-async def join(ctx):
+async def join_VC(ctx):
     global voice
     channel = ctx.message.author.voice.channel
     voice = get(client.voice_clients, guild=ctx.guild)
@@ -46,7 +46,7 @@ async def join(ctx):
 
 ##VC Leave##
 @client.command(pass_context=True, aliases=['leave', 'l', 'L'])
-async def leave(ctx):
+async def leave_VC(ctx):
     channel = ctx.message.author.voice.channel
     voice = get(client.voice_clients, guild=ctx.guild)
 
