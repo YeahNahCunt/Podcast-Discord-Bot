@@ -8,8 +8,8 @@ client = commands.Bot(command_prefix = '|') #holder prefix change later
 async def on_ready():
     print('Bot is ready!')
     
-@client.command() #for testing
+@client.command() #for testing host
 async def ping(ctx):
-    await ctx.send('Pong!')
+    await ctx.send(f'Pong! {client.latency * 1000}ms') 
 
 client.run(os.environ['BOT_TOKEN'])
