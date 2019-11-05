@@ -14,7 +14,7 @@ async def on_ready():
     print(client.user.id)
     print('*******************')
 
-@client.command
+@client.command()
 async def ping(ctx):
     await ctx.send(f'Surprise motherfucker in {client.latency * 1000}ms')
 
