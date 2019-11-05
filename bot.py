@@ -7,5 +7,9 @@ client = commands.Bot(command_prefix = '|') #holder prefix change later
 @client.event
 async def on_ready():
     print('Bot is ready!')
+    
+@client.command() #for testing
+async def ping(ctx):
+    await ctx.send('Pong!')
 
 client.run(os.environ['BOT_TOKEN'])
