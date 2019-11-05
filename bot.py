@@ -10,6 +10,6 @@ async def on_ready():
     
 @client.command() #for testing host
 async def ping(ctx):
-    await ctx.send(f'Pong! {client.latency * 1000}ms') 
+    await ctx.send(f'Surprise motherfucker in {client.latency * 1000}ms !') 
 
 client.run(os.environ['BOT_TOKEN'])
